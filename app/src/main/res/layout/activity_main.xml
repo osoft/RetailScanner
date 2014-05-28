@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/flCameraHolder">
+
+    </FrameLayout>
+
+    <Button
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+        android:text="•"
+        android:id="@+id/btnShutter"
+        android:layout_gravity="right|center_vertical"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:singleLine="false"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:layout_marginRight="10dp"/>
+
+    <Button
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+        android:text="[   ]"
+        android:id="@+id/btnFocus"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/btnShutter"
+        android:layout_marginRight="10dp"/>
+</RelativeLayout>
