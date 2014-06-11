@@ -1,6 +1,7 @@
 package net.zalio.android.retailscanner;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.hardware.Camera;
 import android.net.Uri;
@@ -8,14 +9,14 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.googlecode.tesseract.android.ResultIterator;
 import com.googlecode.tesseract.android.TessBaseAPI;
+
+import net.zalio.android.utils.MyLog;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,12 +29,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends Activity {
+public class CameraActivity extends Activity {
 
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
     final static String TARGET_BASE_PATH = "/sdcard/RetailScanner/";
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = CameraActivity.class.getSimpleName();
     View.OnClickListener mOnShutterClickedListener = new View.OnClickListener() {
 
         @Override
@@ -48,7 +49,7 @@ public class MainActivity extends Activity {
                             new ASyncTask_OCR().execute(data);
                             //File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
                             //if (pictureFile == null) {
-                            //    Log.d(TAG, "Error creating media file, check storage permissions: ");
+                            //    MyLog.d(TAG, "Error creating media file, check storage permissions: ");
                             //    return;
                             //}
                             //try {
@@ -57,18 +58,18 @@ public class MainActivity extends Activity {
                             //    fos.close();
                             //
                             //
-                            //    Log.i(TAG, "START OCR");
+                            //    MyLog.i(TAG, "START OCR");
                             //    mTess.setImage(pictureFile);
-                            //    Log.i(TAG, "text:" + mTess.getUTF8Text());
+                            //    MyLog.i(TAG, "text:" + mTess.getUTF8Text());
                             //
                             //    Toast.makeText(MainActivity.this, mTess.getUTF8Text(), Toast.LENGTH_LONG).show();
                             //
                             //} catch (FileNotFoundException e) {
-                            //    Log.d(TAG, "File not found: " + e.getMessage());
+                            //    MyLog.d(TAG, "File not found: " + e.getMessage());
                             //} catch (IOException e) {
-                            //    Log.d(TAG, "Error accessing file: " + e.getMessage());
+                            //    MyLog.d(TAG, "Error accessing file: " + e.getMessage());
                             //} catch (NullPointerException npe) {
-                            //    Log.d(TAG, "OCR failed!");
+                            //    MyLog.d(TAG, "OCR failed!");
                             //}
                         }
                     }
@@ -107,7 +108,7 @@ public class MainActivity extends Activity {
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.d("MyCameraApp", "failed to create directory");
+                MyLog.d("MyCameraApp", "failed to create directory");
                 return null;
             }
         }
@@ -125,7 +126,7 @@ public class MainActivity extends Activity {
             return null;
         }
 
-        Log.i(TAG, mediaFile.getAbsolutePath());
+        MyLog.i(TAG, mediaFile.getAbsolutePath());
 
         return mediaFile;
     }
@@ -181,7 +182,7 @@ public class MainActivity extends Activity {
             c = Camera.open(); // attempt to get a Camera instance
         } catch (Exception e) {
             // Camera is not available (in use or does not exist)
-            Log.e(TAG, e.getLocalizedMessage());
+            MyLog.e(TAG, e.getLocalizedMessage());
             Toast.makeText(this, "Failed open camera", Toast.LENGTH_LONG).show();
         }
         return c; // returns null if camera is unavailable
@@ -207,7 +208,7 @@ public class MainActivity extends Activity {
         int w = 0;
         int h = 0;
         for (Camera.Size s : supportedSizes) {
-            Log.i(TAG, "Size supported: " + s.width + " " + s.height);
+            MyLog.i(TAG, "Size supported: " + s.width + " " + s.height);
             w = s.width;
             h = s.height;
             if (s.width > 800 && s.width < 1600) {
@@ -220,7 +221,7 @@ public class MainActivity extends Activity {
         w = 0;
         h = 0;
         for (Camera.Size s : supportedSizes) {
-            Log.i(TAG, "Size supported: " + s.width + " " + s.height);
+            MyLog.i(TAG, "Size supported: " + s.width + " " + s.height);
             w = s.width;
             h = s.height;
             if (s.width > 800 && s.width < 1600) {
@@ -252,17 +253,17 @@ public class MainActivity extends Activity {
         AssetManager assetManager = this.getAssets();
         String assets[] = null;
         try {
-            Log.i("tag", "copyFileOrDir() " + path);
+            MyLog.i("tag", "copyFileOrDir() " + path);
             assets = assetManager.list(path);
             if (assets.length == 0) {
                 copyFile(path);
             } else {
                 String fullPath = TARGET_BASE_PATH + path;
-                Log.i("tag", "path=" + fullPath);
+                MyLog.i("tag", "path=" + fullPath);
                 File dir = new File(fullPath);
                 if (!dir.exists() && !path.startsWith("images") && !path.startsWith("sounds") && !path.startsWith("webkit"))
                     if (!dir.mkdirs())
-                        Log.i("tag", "could not create dir " + fullPath);
+                        MyLog.i("tag", "could not create dir " + fullPath);
                 for (int i = 0; i < assets.length; ++i) {
                     String p;
                     if (path.equals(""))
@@ -275,7 +276,7 @@ public class MainActivity extends Activity {
                 }
             }
         } catch (IOException ex) {
-            Log.e("tag", "I/O Exception", ex);
+            MyLog.e(TAG, "I/O Exception " + ex);
         }
     }
 
@@ -286,7 +287,7 @@ public class MainActivity extends Activity {
         OutputStream out = null;
         String newFileName = null;
         try {
-            Log.i("tag", "copyFile() " + filename);
+            MyLog.i("tag", "copyFile() " + filename);
             in = assetManager.open(filename);
             if (filename.endsWith(".jpg")) // extension was added to avoid compression on APK file
                 newFileName = TARGET_BASE_PATH + filename.substring(0, filename.length() - 4);
@@ -305,8 +306,8 @@ public class MainActivity extends Activity {
             out.close();
             out = null;
         } catch (Exception e) {
-            Log.e("tag", "Exception in copyFile() of " + newFileName);
-            Log.e("tag", "Exception in copyFile() " + e.toString());
+            MyLog.e("tag", "Exception in copyFile() of " + newFileName);
+            MyLog.e("tag", "Exception in copyFile() " + e.toString());
         }
 
     }
@@ -315,9 +316,9 @@ public class MainActivity extends Activity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            if (new File(MainActivity.TARGET_BASE_PATH + "data/").isDirectory()) {
-                return null;
-            }
+            //if (new File(MainActivity.TARGET_BASE_PATH + "data/").isDirectory()) {
+            //    return null;
+            //}
             copyFilesToSdCard();
             mTess.init(TARGET_BASE_PATH + "data/", "eng", TessBaseAPI.OEM_TESSERACT_CUBE_COMBINED);
             return null;
@@ -325,8 +326,8 @@ public class MainActivity extends Activity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            Toast.makeText(MainActivity.this, "OCR Ready", Toast.LENGTH_LONG).show();
-            mTess.setPageSegMode(TessBaseAPI.PageSegMode.PSM_AUTO_OSD);
+            Toast.makeText(CameraActivity.this, "OCR Ready", Toast.LENGTH_LONG).show();
+            //mTess.setPageSegMode(TessBaseAPI.PageSegMode.PSM_AUTO_OSD);
         }
     }
 
@@ -338,7 +339,7 @@ public class MainActivity extends Activity {
 
             File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
             if (pictureFile == null) {
-                Log.d(TAG, "Error creating media file, check storage permissions: ");
+                MyLog.d(TAG, "Error creating media file, check storage permissions: ");
                 return null;
             }
             byte[] data = params[0];
@@ -347,11 +348,19 @@ public class MainActivity extends Activity {
                 FileOutputStream fos = new FileOutputStream(pictureFile);
                 fos.write(data);
                 fos.close();
+                sendBroadcast(new Intent(
+                        Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri
+                        .parse("file://" + pictureFile.getAbsolutePath())
+                ));
 
-                Log.i(TAG, "START OCR");
-                mTess.setImage(pictureFile);
-                mTess.setRectangle(0,0,200,200);
-                //Log.i(TAG, "text:" + mTess.getUTF8Text());
+                Intent i = new Intent(CameraActivity.this, FieldSelectionActivity.class);
+                i.putExtra("path", pictureFile.getAbsolutePath());
+                startActivity(i);
+
+                //MyLog.i(TAG, "START OCR");
+                //mTess.setImage(pictureFile);
+                //mTess.setRectangle(0,0,200,200);
+                //MyLog.i(TAG, "text:" + mTess.getUTF8Text());
                 //runOnUiThread(new Runnable() {
                 //    @Override
                 //    public void run() {
@@ -359,51 +368,51 @@ public class MainActivity extends Activity {
                 //    }
                 //});
             } catch (FileNotFoundException e) {
-                Log.d(TAG, "File not found: " + e.getMessage());
+                MyLog.d(TAG, "File not found: " + e.getMessage());
                 return null;
             } catch (IOException e) {
-                Log.d(TAG, "Error accessing file: " + e.getMessage());
+                MyLog.d(TAG, "Error accessing file: " + e.getMessage());
                 return null;
             } catch (NullPointerException npe) {
-                Log.d(TAG, "OCR failed!");
+                MyLog.d(TAG, "OCR failed!");
                 return null;
             }
 
-            Log.i(TAG, "text:" + mTess.getUTF8Text());
-            Log.i(TAG, "regions: " + mTess.getRegions().getBoxRects().size());
-            Log.i(TAG, "Confidence: " + mTess.meanConfidence());
-            for (int conf:mTess.wordConfidences()) {
-                Log.i(TAG, "Word Confidence: " + conf);
-            }
+            //MyLog.i(TAG, "text:" + mTess.getUTF8Text());
+            //MyLog.i(TAG, "regions: " + mTess.getRegions().getBoxRects().size());
+            //MyLog.i(TAG, "Confidence: " + mTess.meanConfidence());
+            //for (int conf:mTess.wordConfidences()) {
+            //    MyLog.i(TAG, "Word Confidence: " + conf);
+            //}
 
             ArrayList<String> resultList = new ArrayList<String>();
-
-            ResultIterator result = mTess.getResultIterator();
-            int level = TessBaseAPI.PageIteratorLevel.RIL_WORD;
-            if (result != null) {
-                result.begin();
-                do {
-                    Log.i(TAG, "Confidence: " + result.confidence(level));
-                    Log.i(TAG, "Text: " + result.getUTF8Text(level));
-                    if (result.confidence(level) > 90 && !result.getUTF8Text(level).trim().isEmpty()) {
-                        resultList.add(result.getUTF8Text(level));
-                    }
-                } while (result.next(level));
-
-            } else {
-                Log.e(TAG, "Iterator is null");
-            }
+            //
+            //ResultIterator result = mTess.getResultIterator();
+            //int level = TessBaseAPI.PageIteratorLevel.RIL_WORD;
+            //if (result != null) {
+            //    result.begin();
+            //    do {
+            //        MyLog.i(TAG, "Confidence: " + result.confidence(level));
+            //        MyLog.i(TAG, "Text: " + result.getUTF8Text(level));
+            //        if (result.confidence(level) > 90 && !result.getUTF8Text(level).trim().isEmpty()) {
+            //            resultList.add(result.getUTF8Text(level));
+            //        }
+            //    } while (result.next(level));
+            //
+            //} else {
+            //    MyLog.e(TAG, "Iterator is null");
+            //}
 
             return resultList;
         }
 
         @Override
         protected void onPostExecute(ArrayList<String> strings) {
-            Log.i(TAG, "vvvvvvvvvv RESULT vvvvvvvvvvv");
+            MyLog.i(TAG, "vvvvvvvvvv RESULT vvvvvvvvvvv");
             for (String s:strings) {
-                Log.i(TAG, "Result String: " + s);
+                MyLog.i(TAG, "Result String: " + s);
             }
-            Log.i(TAG, "^^^^^^^^^^ RESULT ^^^^^^^^^^^");
+            MyLog.i(TAG, "^^^^^^^^^^ RESULT ^^^^^^^^^^^");
         }
     }
 
@@ -419,9 +428,9 @@ public class MainActivity extends Activity {
         boolean isImmersiveModeEnabled =
                 ((uiOptions | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY) == uiOptions);
         if (isImmersiveModeEnabled) {
-            Log.i(TAG, "Turning immersive mode mode off. ");
+            MyLog.i(TAG, "Turning immersive mode mode off. ");
         } else {
-            Log.i(TAG, "Turning immersive mode mode on.");
+            MyLog.i(TAG, "Turning immersive mode mode on.");
         }
 
         // Navigation bar hiding:  Backwards compatible to ICS.

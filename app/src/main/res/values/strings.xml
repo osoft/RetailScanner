@@ -3,5 +3,8 @@
 
     <string name="app_name">RetailScanner</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_field_selection">FieldSelectionActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_submit">SubmitActivity</string>
 
 </resources>
