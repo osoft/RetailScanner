@@ -76,54 +76,26 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="gdata-codesearch-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-calendar-meta-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-youtube-meta-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-photos-meta-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-contacts-meta-3.0" level="project" />
+    <orderEntry type="library" exported="" name="gdata-base-1.0" level="project" />
+    <orderEntry type="library" exported="" name="gdata-gtt-2.0" level="project" />
+    <orderEntry type="library" exported="" name="google-http-client-android-1.18.0-rc" level="project" />
+    <orderEntry type="library" exported="" name="appcompat-v7-19.1.0" level="project" />
     <orderEntry type="library" exported="" name="jsr305" level="project" />
-    <orderEntry type="library" exported="" name="gdata-sidewiki-meta-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-health-meta-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-analytics-meta-2.1" level="project" />
-    <orderEntry type="library" exported="" name="gdata-finance-meta-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-sites-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-finance-2.0" level="project" />
+    <orderEntry type="library" exported="" name="google-oauth-client-1.18.0-rc" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-19.1.0" level="project" />
+    <orderEntry type="library" exported="" name="google-api-client-android-1.17.0-rc" level="project" />
+    <orderEntry type="library" exported="" name="google-http-client-1.18.0-rc" level="project" />
+    <orderEntry type="library" exported="" name="support-v13-19.1.0" level="project" />
+    <orderEntry type="library" exported="" name="guava-16.0.1" level="project" />
+    <orderEntry type="library" exported="" name="gdata-spreadsheet-meta-3.0" level="project" />
     <orderEntry type="library" exported="" name="gdata-gtt-meta-2.0" level="project" />
     <orderEntry type="library" exported="" name="gdata-spreadsheet-3.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-media-1.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-appsforyourdomain-1.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-webmastertools-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-blogger-meta-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-blogger-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-client-1.0" level="project" />
-    <orderEntry type="library" exported="" name="mail" level="project" />
-    <orderEntry type="library" exported="" name="gdata-books-1.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-base-1.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-docs-3.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-maps-meta-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-gtt-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-health-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-contacts-3.0" level="project" />
-    <orderEntry type="library" exported="" name="appcompat-v7-19.1.0" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-19.1.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-youtube-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-sites-meta-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-maps-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-books-meta-1.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-sidewiki-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-docs-meta-3.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-spreadsheet-meta-3.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-analytics-2.1" level="project" />
-    <orderEntry type="library" exported="" name="gdata-projecthosting-meta-2.1" level="project" />
-    <orderEntry type="library" exported="" name="gdata-codesearch-meta-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-projecthosting-2.1" level="project" />
+    <orderEntry type="library" exported="" name="play-services-4.3.23" level="project" />
+    <orderEntry type="library" exported="" name="google-http-client-xml-1.17.0-rc" level="project" />
     <orderEntry type="library" exported="" name="gdata-client-meta-1.0" level="project" />
-    <orderEntry type="library" exported="" name="guava-11.0.2" level="project" />
-    <orderEntry type="library" exported="" name="gdata-calendar-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-photos-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-webmastertools-meta-2.0" level="project" />
-    <orderEntry type="library" exported="" name="gdata-appsforyourdomain-meta-1.0" level="project" />
     <orderEntry type="library" exported="" name="gdata-core-1.0" level="project" />
+    <orderEntry type="library" exported="" name="google-api-client-xml-1.17.0-rc" level="project" />
+    <orderEntry type="library" exported="" name="gdata-client-1.0" level="project" />
     <orderEntry type="module" module-name="tess" exported="" />
   </component>
 </module>
